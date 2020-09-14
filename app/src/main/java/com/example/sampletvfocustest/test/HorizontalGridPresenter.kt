@@ -40,7 +40,8 @@ class HorizontalGridPresenter : Presenter() {
         cardView.contentText = "Being Awesome"
         cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)
         Glide.with(viewHolder.view?.context)
-            .load("https://homepages.cae.wisc.edu/~ece533/images/frymire.png")
+            .load("https://homepages.cae.wisc.edu/~ece533/images/girl.png")
+            .placeholder(ContextCompat.getDrawable(cardView.context, R.mipmap.ic_launcher))
             .centerCrop()
             .error(ContextCompat.getDrawable(cardView.context, R.mipmap.ic_launcher))
             .into(cardView.mainImageView)

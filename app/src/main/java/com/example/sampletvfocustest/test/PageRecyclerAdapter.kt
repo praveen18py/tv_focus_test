@@ -41,19 +41,36 @@ class PageRecyclerAdapter : RecyclerView.Adapter<PageRecyclerAdapter.PageRecycle
         val itemBridgeAdapter = ItemBridgeAdapter(arrayObjectAdapter)
 
         arrayObjectAdapter.setItems(
-            listOf(ListRow(HeaderItem("Hi"), itemAdapter)), listRowAdapterDiffCallback
+            listOf(ListRow(getHeader()[position], itemAdapter)), listRowAdapterDiffCallback
         )
 
         val itemView = holder.itemView.mainFrame
         if (position == 9) {
-            itemView.setPadding(0, 0, 0,
-                convertDpToPixels(150f, itemView.context).toInt())
+            itemView.setPadding(
+                0, 0, 0,
+                convertDpToPixels(150f, itemView.context).toInt()
+            )
         } else {
             itemView.setPadding(0, 0, 0, 0)
         }
 
         hgv.adapter = itemBridgeAdapter
     }
+
+    private fun getHeader(): List<HeaderItem> =
+        listOf(
+            HeaderItem("Rail Title 1"),
+            HeaderItem("Rail Title 2"),
+            HeaderItem("Rail Title 3"),
+            HeaderItem("Rail Title 4"),
+            HeaderItem("Rail Title 5"),
+            HeaderItem("Rail Title 6"),
+            HeaderItem("Rail Title 7"),
+            HeaderItem("Rail Title 8"),
+            HeaderItem("Rail Title 9"),
+            HeaderItem("Rail Title 10")
+        )
+
 
     inner class PageRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

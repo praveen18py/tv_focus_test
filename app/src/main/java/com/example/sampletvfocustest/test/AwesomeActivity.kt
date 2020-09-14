@@ -52,11 +52,13 @@ class AwesomeActivity : Activity() {
             imageView.setOnFocusChangeListener { _, _ ->
                 val find = llMenu.children.find { it.isFocused }
                 if (find == null) {
-                    Log.e("focus", "out focus $previouslyFocusedIndex")
-                    // pageRecycler.scrollToPosition(previouslyFocusedIndex)
-                    pageRecycler.scrollTo(0, previouslyFocusedIndex)
+                    Log.e("previouslyFocusedIndex", "out focus $previouslyFocusedIndex")
+//                    pageRecycler.scrollToPosition(previouslyFocusedIndex)
+//                    pageRecycler.scrollTo(0, previouslyFocusedIndex)
+                    pageRecycler.scrollToPosition(previouslyFocusedIndex)
                 } else {
-                    Log.e("focus", "In focus $previouslyFocusedIndex")
+                    Log.e("previouslyFocusedIndex", "In focus $previouslyFocusedIndex")
+
                 }
             }
 
@@ -77,18 +79,26 @@ class AwesomeActivity : Activity() {
                 val scroller = SmoothScroller(this@AwesomeActivity)
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
-                    val focusedPosition = recyclerView.focusedChild?.let { focusedView ->
-                        recyclerView.getChildAdapterPosition(focusedView)
-                    }
-                    performSmoothScrollToPosition(recyclerView, scroller, focusedPosition)
-                        focusedPosition?.let {
-                            previouslyFocusedIndex =dy
-                        }
+                    scrollToPosition(recyclerView, scroller)
+                    Log.e("previouslyFocusedIndex", "setOnScrollListener ")
                 }
             }
             pageRecycler.addOnScrollListener(collapsedToolbarScrollListener)
         } else {
             pageRecycler.removeOnScrollListener(collapsedToolbarScrollListener)
+        }
+    }
+
+    private fun scrollToPosition(
+        recyclerView: RecyclerView,
+        scroller: SmoothScroller
+    ) {
+        val focusedPosition = recyclerView.focusedChild?.let { focusedView ->
+            recyclerView.getChildAdapterPosition(focusedView)
+        }
+        performSmoothScrollToPosition(recyclerView, scroller, focusedPosition)
+        focusedPosition?.let {
+            previouslyFocusedIndex = focusedPosition
         }
     }
 
