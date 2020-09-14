@@ -52,7 +52,9 @@ class AwesomeActivity : Activity() {
                     Log.e("previouslyFocusedIndex", "out focus $previouslyFocusedIndex")
 //                    pageRecycler.scrollToPosition(previouslyFocusedIndex)
 //                    pageRecycler.scrollTo(0, previouslyFocusedIndex)
-                    pageRecycler.scrollToPosition(previouslyFocusedIndex)
+                    // pageRecycler.scrollToPosition(previouslyFocusedIndex)
+
+                    performSmoothScrollToPosition(pageRecycler, SmoothScroller(this@AwesomeActivity), previouslyFocusedIndex)
                 } else {
                     Log.e("previouslyFocusedIndex", "In focus $previouslyFocusedIndex")
 
