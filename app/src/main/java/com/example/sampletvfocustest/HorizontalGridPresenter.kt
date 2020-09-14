@@ -1,4 +1,4 @@
-package com.example.sampletvfocustest.test
+package com.example.sampletvfocustest
 
 import android.util.Log
 import android.view.ViewGroup
@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat
 import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
 import com.bumptech.glide.Glide
-import com.example.sampletvfocustest.R
 
 class HorizontalGridPresenter : Presenter() {
 
@@ -23,8 +22,14 @@ class HorizontalGridPresenter : Presenter() {
             }
         }
 
-        CARD_WIDTH = convertDpToPixels(206f, parent!!.context).toInt()
-        CARD_HEIGHT = convertDpToPixels(125f, parent.context).toInt()
+        CARD_WIDTH = convertDpToPixels(
+            206f,
+            parent!!.context
+        ).toInt()
+        CARD_HEIGHT = convertDpToPixels(
+            125f,
+            parent.context
+        ).toInt()
 
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true

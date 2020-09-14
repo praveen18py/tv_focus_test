@@ -1,4 +1,4 @@
-package com.example.sampletvfocustest.test
+package com.example.sampletvfocustest
 
 import android.content.Context
 import android.graphics.PointF
@@ -12,7 +12,10 @@ class SmoothScroller(context: Context) {
         object : LinearSmoothScroller(context) {
             //This controls the direction in which smoothScroll looks for your view
             override fun computeScrollVectorForPosition(targetPosition: Int): PointF {
-                return PointF(POSITION_X, POSITION_Y)
+                return PointF(
+                    POSITION_X,
+                    POSITION_Y
+                )
             }
 
             override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics): Float {

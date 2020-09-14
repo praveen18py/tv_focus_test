@@ -1,11 +1,10 @@
-package com.example.sampletvfocustest.test
+package com.example.sampletvfocustest
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.leanback.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sampletvfocustest.R
 import kotlinx.android.synthetic.main.adapter_page_recycler_row.view.*
 
 class PageRecyclerAdapter : RecyclerView.Adapter<PageRecyclerAdapter.PageRecyclerViewHolder>() {
@@ -13,7 +12,7 @@ class PageRecyclerAdapter : RecyclerView.Adapter<PageRecyclerAdapter.PageRecycle
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PageRecyclerAdapter.PageRecyclerViewHolder =
+    ): PageRecyclerViewHolder =
         PageRecyclerViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.adapter_page_recycler_row, parent, false)
@@ -22,7 +21,7 @@ class PageRecyclerAdapter : RecyclerView.Adapter<PageRecyclerAdapter.PageRecycle
     override fun getItemCount() = 10
 
     override fun onBindViewHolder(
-        holder: PageRecyclerAdapter.PageRecyclerViewHolder,
+        holder: PageRecyclerViewHolder,
         position: Int
     ) {
         val itemAdapter = ArrayObjectAdapter(HorizontalGridPresenter())
@@ -41,14 +40,18 @@ class PageRecyclerAdapter : RecyclerView.Adapter<PageRecyclerAdapter.PageRecycle
         val itemBridgeAdapter = ItemBridgeAdapter(arrayObjectAdapter)
 
         arrayObjectAdapter.setItems(
-            listOf(ListRow(getHeader()[position], itemAdapter)), listRowAdapterDiffCallback
+            listOf(ListRow(getHeader()[position], itemAdapter)),
+            listRowAdapterDiffCallback
         )
 
         val itemView = holder.itemView.mainFrame
         if (position == 9) {
             itemView.setPadding(
                 0, 0, 0,
-                convertDpToPixels(150f, itemView.context).toInt()
+                convertDpToPixels(
+                    150f,
+                    itemView.context
+                ).toInt()
             )
         } else {
             itemView.setPadding(0, 0, 0, 0)

@@ -1,4 +1,4 @@
-package com.example.sampletvfocustest.test
+package com.example.sampletvfocustest
 
 import android.app.Activity
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.sampletvfocustest.R
 import kotlinx.android.synthetic.main.activity_awesome.*
 import java.util.*
 
@@ -17,16 +16,14 @@ class AwesomeActivity : Activity() {
     private var previouslyFocusedIndex: Int = -1
     private lateinit var collapsedToolbarScrollListener: RecyclerView.OnScrollListener
 
-    fun performSmoothScrollToPosition(
+    private fun performSmoothScrollToPosition(
         recyclerView: RecyclerView,
         scroller: SmoothScroller,
         focusedPosition: Int?
     ) {
         val layoutManager = recyclerView.layoutManager as StaggeredGridLayoutManager
         focusedPosition?.let { position ->
-            // if (layoutManager.focusedChild !is ConstraintLayout && position >= 0) {
             scroller.startSmoothScroll(layoutManager, position)
-            // }
         }
     }
 
@@ -69,14 +66,17 @@ class AwesomeActivity : Activity() {
     private fun initAdapter() {
         pageRecycler.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        pageRecycler.adapter = PageRecyclerAdapter()
+        pageRecycler.adapter =
+            PageRecyclerAdapter()
         setOnScrollListener(true)
     }
 
     private fun setOnScrollListener(isAddListener: Boolean) {
         if (isAddListener) {
             collapsedToolbarScrollListener = object : RecyclerView.OnScrollListener() {
-                val scroller = SmoothScroller(this@AwesomeActivity)
+                val scroller =
+                    SmoothScroller(this@AwesomeActivity)
+
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     scrollToPosition(recyclerView, scroller)
