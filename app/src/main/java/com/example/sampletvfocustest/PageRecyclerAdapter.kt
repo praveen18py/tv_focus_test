@@ -32,6 +32,14 @@ class PageRecyclerAdapter : RecyclerView.Adapter<PageRecyclerAdapter.PageRecycle
         itemAdapter.add(listOf(""))
         itemAdapter.add(listOf(""))
         itemAdapter.add(listOf(""))
+        itemAdapter.add(listOf(""))
+        itemAdapter.add(listOf(""))
+        itemAdapter.add(listOf(""))
+        itemAdapter.add(listOf(""))
+        itemAdapter.add(listOf(""))
+        itemAdapter.add(listOf(""))
+        itemAdapter.add(listOf(""))
+        itemAdapter.add(listOf(""))
 
         // val horizontalGridPresenter = listOf(HorizontalGridPresenter())
         val hgv = holder.itemView.hgv

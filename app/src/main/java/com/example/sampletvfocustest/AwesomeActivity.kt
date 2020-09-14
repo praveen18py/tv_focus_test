@@ -3,6 +3,7 @@ package com.example.sampletvfocustest
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.view.children
@@ -15,6 +16,8 @@ class AwesomeActivity : Activity() {
 
     private var previouslyFocusedIndex: Int = -1
     private lateinit var collapsedToolbarScrollListener: RecyclerView.OnScrollListener
+
+    private var currentFocusedView: View? = null
 
     private fun performSmoothScrollToPosition(
         recyclerView: RecyclerView,
@@ -36,7 +39,7 @@ class AwesomeActivity : Activity() {
     }
 
     private fun initViews() {
-        for (i in 1..6) {
+        for (i in 1..12) {
             val imageView = ImageView(this)
             imageView.setImageResource(R.drawable.menu_image_selector)
             imageView.isFocusable = true
@@ -54,7 +57,13 @@ class AwesomeActivity : Activity() {
 //                    pageRecycler.scrollTo(0, previouslyFocusedIndex)
                     // pageRecycler.scrollToPosition(previouslyFocusedIndex)
 
-                    performSmoothScrollToPosition(pageRecycler, SmoothScroller(this@AwesomeActivity), previouslyFocusedIndex)
+                    performSmoothScrollToPosition(
+                        pageRecycler,
+                        SmoothScroller(this@AwesomeActivity),
+                        previouslyFocusedIndex
+                    )
+
+                    // pageRecycler.focusableViewAvailable(currentFocusedView)
                 } else {
                     Log.e("previouslyFocusedIndex", "In focus $previouslyFocusedIndex")
 
@@ -71,6 +80,14 @@ class AwesomeActivity : Activity() {
         pageRecycler.adapter =
             PageRecyclerAdapter()
         setOnScrollListener(true)
+
+        // pageRecycler.preserveFocusAfterLayout = true
+
+        pageRecycler.setOnFocusChangeListener { view, b ->
+            println("view is $view, and it is $b")
+            currentFocusedView = view
+        }
+
     }
 
     private fun setOnScrollListener(isAddListener: Boolean) {
