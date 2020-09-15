@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.sampletvfocustest.R
@@ -21,6 +22,7 @@ import com.example.sampletvfocustest.utils.convertDpToPixels
 import kotlinx.android.synthetic.main.activity_recycler_approach.*
 import org.koin.android.ext.android.inject
 import java.util.*
+
 
 class RecyclerApproachActivity : Activity() {
 
@@ -48,16 +50,24 @@ class RecyclerApproachActivity : Activity() {
             imageView.isFocusable = true
             imageView.isFocusableInTouchMode = true
             val linLayPar = LinearLayout.LayoutParams(
-                convertDpToPixels(40f, this).toInt(),
-                convertDpToPixels(40f, this).toInt()
+                convertDpToPixels(30f, this).toInt(),
+                convertDpToPixels(30f, this).toInt()
             )
-            linLayPar.bottomMargin = convertDpToPixels(10f, this).toInt()
+            linLayPar.bottomMargin = convertDpToPixels(25f, this).toInt()
 
             imageView.setOnFocusChangeListener { view, b ->
                 view.animateOnFocus(b, 1.5f, 1.5f)
             }
+            imageView.setOnClickListener {
+                onMenuItemClick(item)
+            }
             llMenu.addView(imageView, linLayPar)
         }
+    }
+
+    private fun onMenuItemClick(item: MenuItem) {
+        Toast.makeText(applicationContext, "${item.title}", Toast.LENGTH_LONG).show()
+        pageRecycler.requestFocus()
     }
 
     private fun handleSportsListResponse(sportsList: List<SportsItem>) {
@@ -67,7 +77,14 @@ class RecyclerApproachActivity : Activity() {
     private fun initViews() {
         initAdapter()
         checkFocus()
+//        addHomeFragment()
     }
+
+    /*private fun addHomeFragment() {
+        val transaction = fragmentManager.beginTransaction
+        transaction.add(R.id.frameLayout, HomeFragment.newInstance("",""))
+        transaction.commit()
+    }*/
 
     private fun initAdapter() {
         pageRecycler.layoutManager =
