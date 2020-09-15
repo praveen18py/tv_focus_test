@@ -1,9 +1,11 @@
 package com.example.sampletvfocustest.di
 
-import com.example.sampletvfocustest.providers.FirebaseSportsDataFactory
-import com.example.sampletvfocustest.providers.SportsDataProvider
+import com.example.sampletvfocustest.providers.*
 import org.koin.dsl.module
 
 val appDependenciesModule = module {
+
     single<SportsDataProvider> { FirebaseSportsDataFactory() }
+    single<ImageProvider> { GlideImageFactory() }
+    single<StorageDataProvider> { FirebaseStorageFactory() }
 }

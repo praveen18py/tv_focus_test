@@ -11,8 +11,12 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.sampletvfocustest.R
+import com.example.sampletvfocustest.data.MenuItem
+import com.example.sampletvfocustest.data.SportsItem
 import com.example.sampletvfocustest.extras.SmoothScroller
+import com.example.sampletvfocustest.providers.ImageProvider
 import com.example.sampletvfocustest.providers.SportsDataProvider
+import com.example.sampletvfocustest.utils.animateOnFocus
 import com.example.sampletvfocustest.utils.convertDpToPixels
 import kotlinx.android.synthetic.main.activity_recycler_approach.*
 import org.koin.android.ext.android.inject
@@ -25,34 +29,44 @@ class RecyclerApproachActivity : Activity() {
     private var currentFocusedView: View? = null
 
     private val sportsDataProvider by inject<SportsDataProvider>()
+    private val imageProvider by inject<ImageProvider>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_approach)
 
-        sportsDataProvider.fetchSportsList()
+        sportsDataProvider.fetchSportsList(::handleSportsListResponse)
+        sportsDataProvider.fetchMenus(::handleMenuData)
         initViews()
     }
 
-    private fun initViews() {
-
-        initMenuItems()
-        initAdapter()
-        checkFocus()
-    }
-
-    private fun initMenuItems() {
-        for (i in 1..5) {
+    private fun handleMenuData(list: List<MenuItem>) {
+        llMenu.removeAllViews()
+        for (item in list) {
             val imageView = ImageView(this)
-            imageView.setImageResource(R.drawable.menu_image_selector)
+            imageProvider.setImageFromFirebase(imageView, item.icon)
             imageView.isFocusable = true
             imageView.isFocusableInTouchMode = true
             val linLayPar = LinearLayout.LayoutParams(
-                convertDpToPixels(50f, this).toInt(),
-                convertDpToPixels(50f, this).toInt()
+                convertDpToPixels(40f, this).toInt(),
+                convertDpToPixels(40f, this).toInt()
             )
+            linLayPar.bottomMargin = convertDpToPixels(10f, this).toInt()
+
+            imageView.setOnFocusChangeListener { view, b ->
+                view.animateOnFocus(b, 1.5f, 1.5f)
+            }
             llMenu.addView(imageView, linLayPar)
         }
+    }
+
+    private fun handleSportsListResponse(sportsList: List<SportsItem>) {
+        Log.e("tag", sportsList.toString())
+    }
+
+    private fun initViews() {
+        initAdapter()
+        checkFocus()
     }
 
     private fun initAdapter() {
