@@ -12,26 +12,14 @@ import com.example.sampletvfocustest.utils.convertDpToPixels
 class HorizontalGridPresenter : Presenter() {
 
     private val TAG = HorizontalGridPresenter::class.java.canonicalName
-
-    private var CARD_WIDTH = 0
-    private var CARD_HEIGHT = 0
+    private var cardWidth = 0
+    private var cardHeight = 0
 
     override fun onCreateViewHolder(parent: ViewGroup?): ViewHolder {
-        val cardView = object : ImageCardView(parent?.context) {
-            override fun setSelected(selected: Boolean) {
-                super.setSelected(selected)
-                // Log.e(TAG, "Selected")
-            }
-        }
+        val cardView = object : ImageCardView(parent?.context) {}
 
-        CARD_WIDTH = convertDpToPixels(
-            206f,
-            parent!!.context
-        ).toInt()
-        CARD_HEIGHT = convertDpToPixels(
-            125f,
-            parent.context
-        ).toInt()
+        cardWidth = convertDpToPixels(206f, parent!!.context).toInt()
+        cardHeight = convertDpToPixels(125f, parent.context).toInt()
 
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
@@ -45,15 +33,15 @@ class HorizontalGridPresenter : Presenter() {
 
         cardView.titleText = "Awesome title"
         cardView.contentText = "Being Awesome"
-        cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)
-        Glide.with(viewHolder.view?.context)
-            .load("https://homepages.cae.wisc.edu/~ece533/images/girl.png")
-//            .placeholder(ContextCompat.getDrawable(cardView.context, R.mipmap.ic_launcher))
-            .centerCrop()
-            .error(ContextCompat.getDrawable(cardView.context,
-                R.mipmap.ic_launcher
-            ))
-            .into(cardView.mainImageView)
+        cardView.setMainImageDimensions(cardWidth, cardHeight)
+
+        viewHolder.view?.context?.let { context ->
+            Glide.with(context)
+                .load("https://homepages.cae.wisc.edu/~ece533/images/girl.png")
+                .centerCrop()
+                .error(ContextCompat.getDrawable(cardView.context, R.mipmap.ic_launcher))
+                .into(cardView.mainImageView)
+        }
     }
 
     override fun onUnbindViewHolder(viewHolder: ViewHolder?) {

@@ -23,8 +23,6 @@ import android.widget.TextView
 import android.widget.Toast
 
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.GlideDrawable
-import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.example.sampletvfocustest.R
 import com.example.sampletvfocustest.data.MovieList
@@ -127,24 +125,24 @@ class MainFragment : BrowseFragment() {
         }
     }
 
-    private fun updateBackground(uri: String?) {
-        val width = mMetrics.widthPixels
-        val height = mMetrics.heightPixels
-        Glide.with(activity)
-            .load(uri)
-            .centerCrop()
-            .error(mDefaultBackground)
-            .into<SimpleTarget<GlideDrawable>>(
-                object : SimpleTarget<GlideDrawable>(width, height) {
-                    override fun onResourceReady(
-                        resource: GlideDrawable,
-                        glideAnimation: GlideAnimation<in GlideDrawable>
-                    ) {
-                        mBackgroundManager.drawable = resource
-                    }
-                })
-        mBackgroundTimer?.cancel()
-    }
+//    private fun updateBackground(uri: String?) {
+//        val width = mMetrics.widthPixels
+//        val height = mMetrics.heightPixels
+//        Glide.with(activity)
+//            .load(uri)
+//            .centerCrop()
+//            .error(mDefaultBackground)
+//            .into<SimpleTarget<GlideDrawable>>(
+//                object : SimpleTarget<GlideDrawable>(width, height) {
+//                    override fun onResourceReady(
+//                        resource: GlideDrawable,
+//                        glideAnimation: GlideAnimation<in GlideDrawable>
+//                    ) {
+//                        mBackgroundManager.drawable = resource
+//                    }
+//                })
+//        mBackgroundTimer?.cancel()
+//    }
 
     private inner class GridItemPresenter : Presenter() {
         override fun onCreateViewHolder(parent: ViewGroup): Presenter.ViewHolder {

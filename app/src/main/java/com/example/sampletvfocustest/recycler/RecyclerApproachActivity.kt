@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.sampletvfocustest.R
 import com.example.sampletvfocustest.extras.SmoothScroller
+import com.example.sampletvfocustest.providers.SportsDataProvider
 import com.example.sampletvfocustest.utils.convertDpToPixels
 import kotlinx.android.synthetic.main.activity_recycler_approach.*
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class RecyclerApproachActivity : Activity() {
@@ -22,14 +24,18 @@ class RecyclerApproachActivity : Activity() {
     private lateinit var collapsedToolbarScrollListener: RecyclerView.OnScrollListener
     private var currentFocusedView: View? = null
 
+    private val sportsDataProvider by inject<SportsDataProvider>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_approach)
+
+        sportsDataProvider.fetchSportsList()
         initViews()
     }
 
     private fun initViews() {
+
         initMenuItems()
         initAdapter()
         checkFocus()
