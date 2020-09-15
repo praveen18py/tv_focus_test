@@ -1,4 +1,4 @@
-package com.example.sampletvfocustest
+package com.example.sampletvfocustest.utils
 
 import android.content.Context
 import android.util.TypedValue

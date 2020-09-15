@@ -1,10 +1,12 @@
-package com.example.sampletvfocustest
+package com.example.sampletvfocustest.recycler
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.leanback.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sampletvfocustest.R
+import com.example.sampletvfocustest.utils.convertDpToPixels
 import kotlinx.android.synthetic.main.adapter_page_recycler_row.view.*
 
 class PageRecyclerAdapter : RecyclerView.Adapter<PageRecyclerAdapter.PageRecyclerViewHolder>() {

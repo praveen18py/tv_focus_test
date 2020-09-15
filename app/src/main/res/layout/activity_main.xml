@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/main_browse_fragment"
-        android:name="com.example.sampletvfocustest.MainFragment"
+        android:name="com.example.sampletvfocustest.extras.MainFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="200dp"

@@ -7,4 +7,16 @@
     <color name="default_background">#3d3d3d</color>
     <color name="color_1a1a1a">#1A1A1A</color>
     <color name="br03_sh100">#005CFF</color>
+    <color name="br04_sh100">#E60054</color>
+    <color name="br02_sh90">#E6E6E6</color>
+    <color name="br02_sh70">#B3B3B3</color>
+    <color name="br02_sh100">#FFFFFF</color>
+    <color name="br05_sh70">#FED44C</color>
+    <color name="br01_sh00">#000000</color>
+    <color name="br02_sh80">#CCCCCC</color>
+    <color name="br01_sh30">#4D4D4D</color>
+    <color name="player_controls_background_color">@color/transparent</color>
+    <color name="transparent">#00000000</color>
+    <color name="br01_sh00_alpha_50">#80000000</color>
+    <color name="brand_dark">#080a0b</color>
 </resources>

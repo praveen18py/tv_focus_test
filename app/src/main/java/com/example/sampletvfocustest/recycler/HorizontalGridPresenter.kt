@@ -1,4 +1,4 @@
-package com.example.sampletvfocustest
+package com.example.sampletvfocustest.recycler
 
 import android.util.Log
 import android.view.ViewGroup
@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat
 import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
 import com.bumptech.glide.Glide
+import com.example.sampletvfocustest.R
+import com.example.sampletvfocustest.utils.convertDpToPixels
 
 class HorizontalGridPresenter : Presenter() {
 
@@ -46,9 +48,11 @@ class HorizontalGridPresenter : Presenter() {
         cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)
         Glide.with(viewHolder.view?.context)
             .load("https://homepages.cae.wisc.edu/~ece533/images/girl.png")
-            .placeholder(ContextCompat.getDrawable(cardView.context, R.mipmap.ic_launcher))
+//            .placeholder(ContextCompat.getDrawable(cardView.context, R.mipmap.ic_launcher))
             .centerCrop()
-            .error(ContextCompat.getDrawable(cardView.context, R.mipmap.ic_launcher))
+            .error(ContextCompat.getDrawable(cardView.context,
+                R.mipmap.ic_launcher
+            ))
             .into(cardView.mainImageView)
     }
 
@@ -58,5 +62,10 @@ class HorizontalGridPresenter : Presenter() {
         // Remove references to images so that the garbage collector can free up memory
         cardView.badgeImage = null
         cardView.mainImage = null
+        cardView.clearFocus()
+        cardView.isFocusable = false
+        cardView.isFocusableInTouchMode = false
+        cardView.removeAllViews()
+        cardView.clearDisappearingChildren()
     }
 }
